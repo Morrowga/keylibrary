@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class KeyService
 {
+    protected static $defaultCollection;
+
+    public static function setDefaultCollection()
+    {
+        self::$defaultCollection = config('keylibrary.default_collection');
+    }
 
     public static function getKeys ($modelId, $collectionName = null)
     {
@@ -16,7 +22,7 @@ class KeyService
             ? Key::where('collection_name', $collectionName)
             ->where('model_id', $modelId)
             ->first()
-            : Key::where('collection_name', 'keys')
+            : Key::where('collection_name', self::setDefaultCollection())
             ->where('model_id', $modelId)
             ->first();
 
@@ -49,7 +55,7 @@ class KeyService
             ? Key::where('collection_name', $collectionName)
             ->where('model_id', $modelId)
             ->first()
-            : Key::where('collection_name', 'keys')
+            : Key::where('collection_name', self::setDefaultCollection())
             ->where('model_id', $modelId)
             ->first();
 
@@ -70,11 +76,15 @@ class KeyService
         try {
             $currentTimestamp = time();
 
-            $collectionName = $collectionName == null ? 'keys' : $collectionName;
+            $defaultCollection = self::setDefaultCollection();
+
+            $fileExtension = config('keylibrary.file_extension');
+
+            $collectionName = $collectionName ?? $defaultCollection;
 
             $basePath = 'public/' . $collectionName . '/' . $model->getKey();
-            $publicKeyPath = $basePath . '/public.pem';
-            $privateKeyPath = $basePath . '/private.pem';
+            $publicKeyPath = $basePath . '/public.' . $fileExtension;
+            $privateKeyPath = $basePath . '/private.' . $fileExtension;
 
             if (!Storage::exists($basePath)) {
                 Storage::makeDirectory($basePath, 0755, true);
@@ -106,7 +116,7 @@ class KeyService
 
     public static function deleteKey($modelId, $collectionName = null)
     {
-        $collectionName = $collectionName == null ? 'keys' : $collectionName;
+        $collectionName = $collectionName == null ? self::setDefaultCollection() : $collectionName;
 
         $basePath = 'public/' . $collectionName  . '/' . $modelId;
 

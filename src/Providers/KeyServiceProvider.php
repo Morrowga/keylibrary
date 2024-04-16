@@ -20,6 +20,7 @@ class KeyServiceProvider extends ServiceProvider
                 __DIR__.'/../migrations/keys_table.php' => database_path('migrations/' . $timestamp . $microseconds  . '_create_keys.php'),
             ], 'key-migrations');
 
+            $this->mergeConfigFrom(__DIR__.'/../config/keylibrary.php', 'keylibrary');
         }
     }
 
