@@ -76,12 +76,12 @@ class KeyService
 
             $privateFileExtension = config('keylibrary.private_file_extension');
 
-            if (!$this->isValidPublicKeyExtension($publicFileExtension)) {
+            if (!KeyService::isValidPublicKeyExtension($publicFileExtension)) {
                 throw new \Exception('your public file extension is not compatible. Please change your public file extension in config file');
             }
 
-            if (!$this->isValidPrivateKeyExtension($publicFileExtension)) {
-                throw new \Exception('your public file extension is not compatible. Please change your public file extension in config file');
+            if (!KeyService::isValidPrivateKeyExtension($privateFileExtension)) {
+                throw new \Exception('your private file extension is not compatible. Please change your private file extension in config file');
             }
 
             $collectionName = $collectionName ?? $defaultCollection;
