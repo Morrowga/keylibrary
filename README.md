@@ -11,10 +11,10 @@ Install package by command
 ```
 composer require thihaeung/keylibrary
 ```
-Publishing key table
+Publishing key table & Config
 
 ```
- php artisan vendor:publish --provider="Thihaeung\KeyLibrary\Providers\KeyServiceProvider" --tag=key-migrations
+  php artisan vendor:publish --provider="Thihaeung\KeyLibrary\Providers\KeyServiceProvider" --tag=key-library-config --tag=key-migrations
 ```
 Migrating table 
 

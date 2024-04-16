@@ -3,14 +3,27 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Default File Extension
+    | Default Public File Extension
     |--------------------------------------------------------------------------
     |
     | This option defines the default file extension used for storing RSA keys.
-    | You can specify any valid file extension such as "pem", "key", etc.
+    | You can specify any valid file extension such as "pem", "key", "crt", "pub", etc.
     |
     */
-    'file_extension' => 'pem',
+
+    'public_file_extension' => 'pem',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Private File Extension
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the default file extension used for storing RSA keys.
+    | You can specify any valid file extension such as "pem", "key", "crt", etc.
+    |
+    */
+
+    'private_file_extension' => 'pem',
 
     /*
     |--------------------------------------------------------------------------
@@ -21,5 +34,6 @@ return [
     | You can specify any valid collection name as the default.
     |
     */
+
     'default_collection' => 'keys',
 ];
