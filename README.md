@@ -24,6 +24,14 @@ php artisan migrate
 
 ## Usage
 
+Public Key Extension
+
+- crt,pem,pub,key
+
+Private Key Extension
+
+- crt,pem,key
+
 Use key trait in your desire model
 
 ```
