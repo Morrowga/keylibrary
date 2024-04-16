@@ -13,8 +13,10 @@
         }
     ],
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "thihaeung/keylibrary": "^1.0"
     },
+    "minimum-stability": "stable",
     "extra": {
         "laravel": {
             "providers": [
