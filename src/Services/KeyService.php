@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class KeyService
 {
-    protected static $defaultCollection;
-
-    public static function setDefaultCollection()
-    {
-        self::$defaultCollection = config('keylibrary.default_collection');
-    }
 
     public static function getKeys ($modelId, $collectionName = null)
     {
@@ -22,7 +16,7 @@ class KeyService
             ? Key::where('collection_name', $collectionName)
             ->where('model_id', $modelId)
             ->first()
-            : Key::where('collection_name', self::setDefaultCollection())
+            : Key::where('collection_name', config('keylibrary.default_collection'))
             ->where('model_id', $modelId)
             ->first();
 
@@ -55,7 +49,7 @@ class KeyService
             ? Key::where('collection_name', $collectionName)
             ->where('model_id', $modelId)
             ->first()
-            : Key::where('collection_name', self::setDefaultCollection())
+            : Key::where('collection_name', config('keylibrary.default_collection'))
             ->where('model_id', $modelId)
             ->first();
 
@@ -76,15 +70,25 @@ class KeyService
         try {
             $currentTimestamp = time();
 
-            $defaultCollection = self::setDefaultCollection();
+            $defaultCollection = config('keylibrary.default_collection');
 
-            $fileExtension = config('keylibrary.file_extension');
+            $publicFileExtension = config('keylibrary.public_file_extension');
+
+            $privateFileExtension = config('keylibrary.private_file_extension');
+
+            if (!$this->isValidPublicKeyExtension($publicFileExtension)) {
+                throw new \Exception('your public file extension is not compatible. Please change your public file extension in config file');
+            }
+
+            if (!$this->isValidPrivateKeyExtension($publicFileExtension)) {
+                throw new \Exception('your public file extension is not compatible. Please change your public file extension in config file');
+            }
 
             $collectionName = $collectionName ?? $defaultCollection;
 
             $basePath = 'public/' . $collectionName . '/' . $model->getKey();
-            $publicKeyPath = $basePath . '/public.' . $fileExtension;
-            $privateKeyPath = $basePath . '/private.' . $fileExtension;
+            $publicKeyPath = $basePath . '/public.' . $publicFileExtension;
+            $privateKeyPath = $basePath . '/private.' . $privateFileExtension;
 
             if (!Storage::exists($basePath)) {
                 Storage::makeDirectory($basePath, 0755, true);
@@ -116,7 +120,7 @@ class KeyService
 
     public static function deleteKey($modelId, $collectionName = null)
     {
-        $collectionName = $collectionName == null ? self::setDefaultCollection() : $collectionName;
+        $collectionName = $collectionName == null ? config('keylibrary.default_collection') : $collectionName;
 
         $basePath = 'public/' . $collectionName  . '/' . $modelId;
 
@@ -147,4 +151,15 @@ class KeyService
         }
     }
 
+    public static function isValidPublicKeyExtension($extension)
+    {
+        $validExtensions = ['pem', 'pub', 'crt', 'key'];
+        return in_array(strtolower($extension), $validExtensions);
+    }
+
+    public static function isValidPrivateKeyExtension($extension)
+    {
+        $validExtensions = ['pem', 'crt', 'key'];
+        return in_array(strtolower($extension), $validExtensions);
+    }
 }
