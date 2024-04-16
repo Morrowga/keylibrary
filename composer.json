@@ -1,0 +1,24 @@
+{
+    "name": "thihaeung/notelibrary",
+    "description": "notelibrary",
+    "autoload": {
+        "psr-4": {
+            "Thihaeung\\KeyLibrary\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "thihaeung",
+            "email": "48879518+Morrowga@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Thihaeung\\KeyLibrary\\Providers\\KeyServiceProvider"
+            ]
+        }
+    }
+
+}
