@@ -26,6 +26,20 @@ class KeyService
         }
     }
 
+    public static function getAllCollectionKeys ($modelId)
+    {
+        try {
+            $keys = Key::where('model_id', $modelId)
+            ->get();
+
+            return $keys;
+
+        } catch (\Throwable $th) {
+
+            throw $th;
+        }
+    }
+
     public static function getKey ($modelId,string $keyType, string $collectionName = null)
     {
         try {

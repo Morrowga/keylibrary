@@ -22,6 +22,17 @@ trait HasKeyCollection
         return $keys;
     }
 
+    public function getAllCollectionKeys()
+    {
+
+        $modelId = $this->id;
+
+        $keys = KeyService::getAllCollectionKeys($modelId);
+
+        return $keys;
+    }
+
+
     public function getPublicKey($collectionName = null)
     {
 
