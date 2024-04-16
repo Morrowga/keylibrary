@@ -13,8 +13,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
-        "thihaeung/keylibrary": "^1.0"
+        "php": "^8.2"
     },
     "minimum-stability": "stable",
     "extra": {
