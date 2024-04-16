@@ -10,7 +10,7 @@ class KeyServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../migrations' => database_path('migrations'),
-        ], 'key-migrations');
+        ], 'migrations');
     }
 
     public function register()
