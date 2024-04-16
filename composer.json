@@ -19,6 +19,6 @@
                 "Thihaeung\\KeyLibrary\\Providers\\KeyServiceProvider"
             ]
         }
-    }
-
+    },
+    "license": "MIT"
 }
