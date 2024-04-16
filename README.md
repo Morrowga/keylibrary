@@ -10,19 +10,16 @@ Install package by command
 
 ```
 composer require thihaeung/keylibrary
-
 ```
 Publishing key table
 
 ```
  php artisan vendor:publish --provider="Thihaeung\KeyLibrary\Providers\KeyServiceProvider" --tag=key-migrations
-
 ```
 Migrating table 
 
 ```
 php artisan migrate
-
 ```
 
 ## Usage
@@ -33,7 +30,6 @@ Use key trait in your desire model
 use Thihaeung\KeyLibrary\Traits\HasKeyCollection;
 
 use HasKeyCollection;
-
 ```
 
 Store Key with collection or without collection. Note - if you don't add collection, the default collection will be  'keys' folder and key file extension will .pem .
@@ -42,14 +38,12 @@ Store Key with collection or without collection. Note - if you don't add collect
 
 ```
 $model->addToKeyCollection($publicKey, $privateKey);
-
 ```
 
 - With Collection
 
 ```
 $model->addToKeyCollection($publicKey, $privateKey, $collectionName);
-
 ```
 
 Fetching Key String and Key Path
@@ -58,43 +52,36 @@ Fetching Key String and Key Path
 
 ```
 $model->getKeys();
-
 ```
 - get Both Keys With Collection
 
 ```
 $model->getKeys($collectionName);
-
 ```
 - get only Public Key without Collection
 
 ```
 $model->getPublicKey();
-
 ```
 - get only Public Key with Collection
 
 ```
 $model->getPublicKey($collectionName);
-
 ```
 - get only Private Key without Collection
 
 ```
 $model->getPrivateKey();
-
 ```
 - get only Private Key with Collection
 
 ```
 $model->getPrivateKey($collectionName);
-
 ```
 - get Keys from all collections
 
 ```
 $model->getAllCollectionKeys();
-
 ```
 Deleting Keys
 
@@ -102,18 +89,15 @@ Deleting Keys
 
 ```
 $model->deleteKeyFromCollection();
-
 ```
 - delete Keys with collection
 
 ```
 $model->deleteKeyFromCollection($collectionName);
-
 ```
 - Delete Collection Commands
 
 ```
 php artisan key:delete-collection collectionName
-
 ```
 
