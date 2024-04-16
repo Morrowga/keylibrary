@@ -1,6 +1,6 @@
 {
-    "name": "thihaeung/notelibrary",
-    "description": "notelibrary",
+    "name": "thihaeung/keylibrary",
+    "description": "keylibrary",
     "autoload": {
         "psr-4": {
             "Thihaeung\\KeyLibrary\\": "src/"
