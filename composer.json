@@ -12,7 +12,9 @@
             "email": "48879518+Morrowga@users.noreply.github.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^8.2"
+    },
     "extra": {
         "laravel": {
             "providers": [
